@@ -1,0 +1,11 @@
+{
+  "id": "3699ef3c653d",
+  "title": "Strings Analysis Methodology",
+  "content": "\n# Strings Analysis for Malware\n\n## Tools\n- strings (Linux): strings -a -n 6 sample.exe\n- FLOSS (FireEye): Better at finding obfuscated strings\n- BinText: GUI for Windows\n- pestudio: Shows strings with indicators\n\n## What to Look For\n\n### URLs and IPs\n- http://, https://, ftp://\n- IP patterns: \\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\n- Common ports: :80, :443, :8080, :4444\n\n### File Paths\n- C:\\Windows\\System32\n- C:\\Users\\\n- %TEMP%, %APPDATA%\n- Common drop locations\n\n### Commands\n- cmd.exe, powershell.exe\n- net user, net localgroup\n- reg add, reg delete\n- schtasks, at\n- wmic, bitsadmin\n\n### Crypto/Encoding Indicators\n- Base64 alphabet: A-Za-z0-9+/=\n- Hex strings: Long strings of 0-9A-F\n- -----BEGIN RSA----- (certificates)\n\n### API Names\n- VirtualAlloc, VirtualProtect (shellcode)\n- CreateRemoteThread (injection)\n- WinExec, ShellExecute (execution)\n- URLDownloadToFile (download)\n- CryptEncrypt (crypto)\n\n### Error Messages\n- Often reveal functionality\n- \"Failed to connect\"\n- \"File not found\"\n- Debug strings left by developer\n\n## FLOSS Usage\n```\nfloss sample.exe > strings_output.txt\nfloss -n 8 sample.exe  # minimum length 8\n```\nFLOSS automatically tries to decode obfuscated strings.\n\n## Red Flags in Strings\n- Anti-VM strings: VMware, VirtualBox, QEMU\n- Anti-debug: IsDebuggerPresent, CheckRemoteDebugger\n- Sandbox names: Cuckoo, Any.run, sandbox\n",
+  "source": "generated_procedure",
+  "source_type": "procedure",
+  "url": null,
+  "metadata": {
+    "quality": "high"
+  }
+}

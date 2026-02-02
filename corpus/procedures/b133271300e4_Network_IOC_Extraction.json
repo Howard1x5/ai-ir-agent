@@ -1,0 +1,9 @@
+{
+  "id": "b133271300e4",
+  "title": "Network IOC Extraction",
+  "content": "\n# Network IOC Extraction Procedure\n\n## Capture Setup\n- FakeNet-NG: Simulates internet services, captures traffic\n- Wireshark: Full packet capture\n- INetSim (REMnux): Simulated internet services\n\n## DNS Indicators\n- Extract queried domains from Wireshark: dns.qry.name\n- Check for DGA patterns (random-looking domains)\n- Note: A, AAAA, TXT, CNAME record types\n\n## HTTP/HTTPS Indicators\n- URLs, User-Agents, Headers\n- POST data (potential exfiltration)\n- For HTTPS: May need to MITM or check memory\n\n## IP Addresses\n- C2 servers, staging servers\n- Geolocation can indicate actor origin\n- Check against threat intelligence\n\n## Defanging IOCs\n- URLs: hxxps:// instead of https://\n- IPs: 192.168.1[.]1 instead of 192.168.1.1\n- Domains: evil[.]com instead of evil.com\n\n## Tools\n- Wireshark filters: http.request, dns, tcp.port==443\n- tshark for command-line extraction\n- NetworkMiner for artifact extraction\n",
+  "source": "generated",
+  "source_type": "procedure",
+  "url": null,
+  "metadata": null
+}

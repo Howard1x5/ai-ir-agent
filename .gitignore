@@ -1,0 +1,27 @@
+# Environment and secrets
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+
+# RAG database
+*.faiss
+*.pkl
+chroma_db/
+
+# Malware samples (safety)
+samples/
+*.exe
+*.dll
+*.vbs
+*.ps1
+
+# Temp
+*.log
+ssh-setup.html

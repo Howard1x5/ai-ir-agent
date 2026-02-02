@@ -1,0 +1,9 @@
+{
+  "id": "d22a0fba661a",
+  "title": "PE Executable Analysis",
+  "content": "\n# PE Executable Analysis Procedure\n\n## Tools to Use\n- pestudio: Initial triage, indicators\n- PE-bear: Header analysis\n- Detect It Easy: Packer/compiler detection\n- IDA Free or Ghidra: Disassembly\n- x64dbg: Dynamic debugging\n\n## Static Analysis Steps\n\n### 1. File Properties\n- File size, compile timestamp\n- Check for anomalies (future dates, round sizes)\n\n### 2. Header Analysis\n- Entry point location\n- Section names (.text, .data, .rsrc, .reloc)\n- Suspicious sections: high entropy, unusual names\n\n### 3. Import Analysis\n- Network: ws2_32.dll, wininet.dll, winhttp.dll\n- Process: kernel32.dll CreateProcess, VirtualAlloc\n- Crypto: advapi32.dll CryptEncrypt/Decrypt\n- Anti-debug: IsDebuggerPresent, CheckRemoteDebuggerPresent\n\n### 4. Strings Analysis\n- Use FLOSS for better string extraction\n- Look for: URLs, IPs, file paths, registry keys, commands\n\n## Dynamic Analysis\n\n### Debugging with x64dbg\n- Set breakpoints on suspicious APIs\n- Track memory allocations (VirtualAlloc)\n- Monitor network calls\n\n### API Monitoring\n- API Monitor for detailed call logging\n- Procmon for file/registry/network activity\n",
+  "source": "generated",
+  "source_type": "procedure",
+  "url": null,
+  "metadata": null
+}

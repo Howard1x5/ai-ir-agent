@@ -1,0 +1,11 @@
+{
+  "id": "2d6478171195",
+  "title": "API Monitor Usage for Dynamic Analysis",
+  "content": "\n# API Monitor for Malware Dynamic Analysis\n\n## Setup\n1. Run API Monitor as Administrator\n2. Select API Filter (left panel):\n   - Data Access and Storage > File Management\n   - Data Access and Storage > Registry\n   - Internet > HTTP (WinINet/WinHTTP)\n   - System Services > Processes and Threads\n   - System Services > Memory Management\n\n## Key APIs to Monitor\n\n### Process/Thread Creation\n- CreateProcess, CreateProcessA/W\n- CreateThread, CreateRemoteThread\n- NtCreateProcess, NtCreateThread\n\n### Memory Operations (shellcode indicators)\n- VirtualAlloc, VirtualAllocEx\n- VirtualProtect\n- WriteProcessMemory\n- NtAllocateVirtualMemory\n\n### File Operations\n- CreateFile, DeleteFile, CopyFile\n- WriteFile, ReadFile\n- MoveFile\n\n### Registry\n- RegOpenKey, RegCreateKey\n- RegSetValue, RegDeleteValue\n\n### Network\n- InternetOpen, InternetConnect\n- HttpOpenRequest, HttpSendRequest\n- URLDownloadToFile\n- socket, connect, send, recv\n\n### Crypto\n- CryptAcquireContext\n- CryptEncrypt, CryptDecrypt\n- CryptGenKey\n\n## Analysis Tips\n- Set breakpoints on VirtualAlloc to catch shellcode allocation\n- Watch CreateRemoteThread for process injection\n- Follow the call stack to understand context\n- Export call log for documentation\n\n## Common Patterns\n1. Download + Execute:\n   URLDownloadToFile -> CreateProcess\n\n2. Process Injection:\n   OpenProcess -> VirtualAllocEx -> WriteProcessMemory -> CreateRemoteThread\n\n3. Persistence:\n   RegCreateKey (Run keys) -> RegSetValue\n\n4. Anti-analysis:\n   IsDebuggerPresent -> ExitProcess\n",
+  "source": "generated_procedure",
+  "source_type": "procedure",
+  "url": null,
+  "metadata": {
+    "quality": "high"
+  }
+}
