@@ -1,8 +1,14 @@
-# AI IR Agent
+# AI-Powered Incident Response Agent
 
-An AI-powered Incident Response and Malware Analysis agent that uses RAG (Retrieval-Augmented Generation) to provide context-aware analysis capabilities.
+> **Project Status:** Completed with valuable lessons learned
+>
+> This project successfully demonstrated the limitations of RAG-only approaches for complex malware analysis. **[Jump to Assessment](#project-assessment)** or read the **[Full Analysis](PROJECT_ASSESSMENT.md)** to see what I learned about when RAG is (and isn't) the right tool.
+
+---
 
 ## Overview
+
+An AI-powered Incident Response and Malware Analysis agent that uses RAG (Retrieval-Augmented Generation) to provide context-aware analysis capabilities.
 
 This agent combines:
 - **Claude API** for intelligent analysis and decision-making
@@ -169,3 +175,74 @@ Contributions welcome! Areas of interest:
 ## License
 
 MIT License
+
+---
+
+## Project Assessment
+
+### What I Built
+A RAG-based autonomous malware analysis agent that:
+- Used ChromaDB vector database for retrieval
+- Integrated Claude API for reasoning
+- Executed tools via SSH on FLARE VM
+- Generated analysis reports
+
+### What I Learned
+
+**Key Finding:** RAG agents excel at knowledge retrieval but struggle with complex reasoning tasks requiring synthesis across multiple data sources.
+
+**The Test:** I analyzed the same AsyncRAT/VenomRAT sample twice:
+1. **RAG Agent** (25 steps, 17 minutes): Failed to identify malware family, zero MITRE techniques mapped, minimal actionable output
+2. **Claude Code Direct** (systematic approach, 10 minutes): Identified VenomRAT 6.X, mapped 15 MITRE techniques, extracted config, produced professional IR report
+
+**Side-by-Side Results:**
+
+| Analysis Aspect | RAG Agent | Claude Code |
+|-----------------|-----------|-------------|
+| Malware Family | Not identified | VenomRAT 6.X |
+| Verdict | "No specific findings" | MALICIOUS - 95% confidence |
+| MITRE Techniques | 0 | 15 mapped |
+| Config Extraction | Decoded 1 string | Full AES key + persistence |
+| Report Quality | Minimal JSON | Professional IR report |
+
+**Why RAG Underperformed:**
+- **No synthesis capability**: Listed data but couldn't connect findings to conclusions
+- **Random tool selection**: No systematic methodology, tried tools without purpose
+- **No domain reasoning**: Didn't understand what "Stub.exe" means (common RAT indicator)
+- **Weak verdict generation**: Can't say "this is malicious because X, Y, Z"
+
+**When RAG IS Valuable:**
+- **Knowledge lookup**: "What MITRE technique matches this behavior?"
+- **Historical comparison**: "Have we seen samples with this AES key before?"
+- **Tool guidance**: "How do I configure CAPA for .NET analysis?"
+- **Threat intel retrieval**: "What campaigns use AsyncRAT?"
+
+**The Architecture Insight:**
+
+```
+RAG as orchestrator (what I built)
+   RAG Agent -> decides what to do -> executes -> fails to synthesize
+
+RAG as knowledge base (what works)
+   Claude Code -> decides what to do -> queries RAG when needed -> synthesizes
+```
+
+**Bottom Line:** RAG is a reference library, not an analyst. Complex IR workflows need strong reasoning (Claude Code) PLUS specialized retrieval (RAG), not RAG alone.
+
+### What's Next
+
+This project validated an important architectural principle: **Use the right tool for the right job.**
+
+For malware analysis automation, the winning combination is:
+- **Claude Code** for reasoning, synthesis, and adaptive analysis
+- **RAG** for historical lookups and specialized knowledge retrieval (when you have the corpus)
+- **Computer use** for GUI tool interaction (future enhancement)
+
+### Full Analysis
+
+See **[PROJECT_ASSESSMENT.md](PROJECT_ASSESSMENT.md)** for:
+- Detailed test methodology
+- Complete side-by-side comparison
+- Technical analysis of why RAG underperformed
+- Specific use cases where RAG adds value
+- Lessons learned for building AI-powered security tools
