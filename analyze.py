@@ -2,6 +2,11 @@
 """
 AI IR Agent - Command Line Interface
 Usage: python analyze.py <sample_path_on_vm> [sample_name]
+
+Safety Features:
+  - Detonation guardrails prevent accidental malware execution
+  - Use --allow-detonation on isolated VM for dynamic analysis
+  - Network detonation requires explicit --allow-network-detonation flag
 """
 
 import sys
@@ -11,7 +16,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from src.core.agent import IRAgent
+from src.core.agent import IRAgent, DetonationBlockedError
 
 
 def main():
@@ -20,14 +25,24 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Analyze a sample on the FLARE VM
-  python analyze.py "C:\\Users\\analyst\\Desktop\\malware.exe"
+  # Analyze a sample (static analysis only - safe)
+  python analyze.py "C:\\Samples\\rats\\asyncrat.exe"
 
   # Analyze with custom name
-  python analyze.py "C:\\Users\\analyst\\Desktop\\sample.bin" "suspicious_dropper"
+  python analyze.py "C:\\Samples\\rats\\sample.bin" "suspicious_dropper"
 
   # Test mode (verifies connection)
   python analyze.py --test
+
+  # Dynamic analysis on isolated detonation VM (DANGEROUS)
+  python analyze.py "C:\\Samples\\rats\\malware.exe" --allow-detonation
+
+  # Network-enabled detonation for secondary payloads (VERY DANGEROUS)
+  python analyze.py "C:\\Samples\\loaders\\dropper.exe" --allow-detonation --allow-network-detonation
+
+Safety:
+  By default, the agent will BLOCK any attempt to execute malware.
+  Use --allow-detonation ONLY on the isolated detonation VM (see DETONATION_VM_HOST in .env).
         """
     )
 
@@ -52,8 +67,33 @@ Examples:
         default=20,
         help="Maximum analysis steps (default: 20)"
     )
+    parser.add_argument(
+        "--allow-detonation",
+        action="store_true",
+        help="Allow malware execution (ONLY use on isolated detonation VM!)"
+    )
+    parser.add_argument(
+        "--allow-network-detonation",
+        action="store_true",
+        help="Allow detonation with network access (DANGEROUS - for secondary payload analysis)"
+    )
 
     args = parser.parse_args()
+
+    # Safety warning for detonation flags
+    if args.allow_detonation:
+        print("\n" + "!" * 60)
+        print("WARNING: --allow-detonation flag is set!")
+        print("Malware execution will be ALLOWED on this VM.")
+        print("Ensure you are on the ISOLATED detonation VM (see DETONATION_VM_HOST)")
+        print("!" * 60 + "\n")
+
+    if args.allow_network_detonation:
+        print("\n" + "!" * 60)
+        print("CRITICAL WARNING: --allow-network-detonation flag is set!")
+        print("Malware may connect to the internet and download payloads!")
+        print("This should ONLY be used for controlled secondary payload analysis.")
+        print("!" * 60 + "\n")
 
     print("=" * 60)
     print("AI IR Agent - Automated Malware Analysis")
@@ -112,22 +152,36 @@ Examples:
         print("\nError: sample_path is required (or use --test)")
         sys.exit(1)
 
-    # Run analysis
-    agent = IRAgent(max_steps=args.max_steps)
+    # Run analysis with safety guardrails
+    try:
+        agent = IRAgent(
+            max_steps=args.max_steps,
+            allow_detonation=args.allow_detonation,
+            allow_network_detonation=args.allow_network_detonation
+        )
 
-    sample_name = args.sample_name or Path(args.sample_path).name
-    report = agent.analyze_sample(args.sample_path, sample_name)
+        sample_name = args.sample_name or Path(args.sample_path).name
+        report = agent.analyze_sample(args.sample_path, sample_name)
 
-    # Save report
-    report_path = agent.save_report(report)
+        # Save report
+        report_path = agent.save_report(report)
 
-    print("\n" + "=" * 60)
-    print("ANALYSIS COMPLETE")
-    print("=" * 60)
-    print(f"\nSample: {report.sample_name}")
-    print(f"Steps: {len(report.steps)}")
-    print(f"\nSummary:\n{report.summary}")
-    print(f"\nFull report: {report_path}")
+        print("\n" + "=" * 60)
+        print("ANALYSIS COMPLETE")
+        print("=" * 60)
+        print(f"\nSample: {report.sample_name}")
+        print(f"Steps: {len(report.steps)}")
+        print(f"\nSummary:\n{report.summary}")
+        print(f"\nFull report: {report_path}")
+
+    except DetonationBlockedError as e:
+        print("\n" + "=" * 60)
+        print("ANALYSIS HALTED - DETONATION BLOCKED")
+        print("=" * 60)
+        print(f"\nReason: {e}")
+        print("\nStatic analysis may have completed. Check output above for findings.")
+        print("To proceed with dynamic analysis, follow the instructions above.")
+        sys.exit(2)
 
 
 if __name__ == "__main__":
