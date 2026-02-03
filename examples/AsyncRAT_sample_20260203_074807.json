@@ -1,0 +1,291 @@
+{
+  "sample_name": "AsyncRAT_sample",
+  "sample_hash": null,
+  "start_time": "2026-02-03T07:31:27.539448",
+  "end_time": "2026-02-03T07:48:07.133726",
+  "steps": [
+    {
+      "step_number": 1,
+      "action": "execute_command",
+      "command": "certutil -hashfile \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" SHA256",
+      "result": "SHA256 hash of C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe:\n06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff\nCertUtil: -hashfile command completed successfully.",
+      "reasoning": "I'll help you analyze the AsyncRAT sample. Let me start by verifying the file exists and calculating its hash.\n\n```execute\ncertutil -hashfile \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c09",
+      "timestamp": "2026-02-03T07:31:31.658794"
+    },
+    {
+      "step_number": 2,
+      "action": "execute_command",
+      "command": "Get-FileHash \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" -Algorithm MD5",
+      "result": "'Get-FileHash' is not recognized as an internal or external command,\noperable program or batch file.",
+      "reasoning": "Great! The file exists and the SHA256 hash matches the filename. Now let me get additional hashes and file information.\n\n```execute\nGet-FileHash \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832",
+      "timestamp": "2026-02-03T07:31:35.385202"
+    },
+    {
+      "step_number": 3,
+      "action": "execute_command",
+      "command": "certutil -hashfile \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" MD5",
+      "result": "MD5 hash of C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe:\naa16b5a6c856065b71f4e07cd37d9240\nCertUtil: -hashfile command completed successfully.",
+      "reasoning": "Let me use certutil for MD5 and get file information:\n\n```execute\ncertutil -hashfile \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" MD5\n```",
+      "timestamp": "2026-02-03T07:31:38.892837"
+    },
+    {
+      "step_number": 4,
+      "action": "execute_command",
+      "command": "dir \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"",
+      "result": "Volume in drive C has no label.\n Volume Serial Number is 9202-F40A\n\n Directory of C:\\Samples\\rats\n\n02/03/2026  12:12 PM            46,080 06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\n               1 File(s)         46,080 bytes\n               0 Dir(s)  21,083,607,040 bytes free",
+      "reasoning": "Now let me get basic file information and check the file type:\n\n```execute\ndir \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"\n```",
+      "timestamp": "2026-02-03T07:31:41.939219"
+    },
+    {
+      "step_number": 5,
+      "action": "execute_command",
+      "command": "file \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"",
+      "result": "C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe: PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
+      "reasoning": "Now let me check the file type using the file command if available, or examine the PE headers:\n\n```execute\nfile \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"\n`",
+      "timestamp": "2026-02-03T07:31:45.882643"
+    },
+    {
+      "step_number": 6,
+      "action": "execute_command",
+      "command": "C:\\Tools\\SysinternalsSuite\\strings.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_strings.txt",
+      "result": "The system cannot find the path specified.",
+      "reasoning": "Excellent! This is a .NET assembly. Let me now perform static analysis using strings to extract readable text and look for indicators:\n\n```execute\nC:\\Tools\\SysinternalsSuite\\strings.exe \"C:\\Samples\\ra",
+      "timestamp": "2026-02-03T07:31:50.405667"
+    },
+    {
+      "step_number": 7,
+      "action": "execute_command",
+      "command": "mkdir C:\\temp",
+      "result": "",
+      "reasoning": "Let me create the temp directory first and then run strings:\n\n```execute\nmkdir C:\\temp\n```",
+      "timestamp": "2026-02-03T07:31:52.895313"
+    },
+    {
+      "step_number": 8,
+      "action": "execute_command",
+      "command": "C:\\Tools\\SysinternalsSuite\\strings.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_strings.txt",
+      "result": "The system cannot find the path specified.",
+      "reasoning": "Now let me run strings analysis:\n\n```execute\nC:\\Tools\\SysinternalsSuite\\strings.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_strings.tx",
+      "timestamp": "2026-02-03T07:31:55.870167"
+    },
+    {
+      "step_number": 9,
+      "action": "execute_command",
+      "command": "dir C:\\Tools",
+      "result": "Volume in drive C has no label.\n Volume Serial Number is 9202-F40A\n\n Directory of C:\\Tools\n\n01/30/2026  03:34 PM    <DIR>          .\n01/30/2026  01:22 PM    <DIR>          Advanced Installer\n01/30/2026  01:45 PM    <DIR>          apktool\n10/01/2023  07:03 AM    <DIR>          Beta-cbb1d5c32d02b4e07128a197c8b8fb6ea597916a\n01/30/2026  01:48 PM    <DIR>          binaryninja\n01/30/2026  01:50 PM    <DIR>          BinDiff\n01/30/2026  01:51 PM    <DIR>          blobrunner\n01/30/2026  01:51 PM    <DIR>          blobrunner64\n01/30/2026  01:51 PM    <DIR>          Bytecode Viewer\n01/30/2026  01:52 PM    <DIR>          capa\n01/30/2026  01:51 PM    <DIR>          capa Explorer Web\n01/30/2026  01:57 PM    <DIR>          Cmder\n01/30/2026  01:58 PM    <DIR>          CryptoTester\n01/30/2026  01:59 PM    <DIR>          Cutter\n01/30/2026  02:00 PM    <DIR>          CyberChef\n01/30/2026  02:01 PM    <DIR>          cygwin\n01/30/2026  02:04 PM    <DIR>          d2j-dex2jar\n01/30/2026  02:04 PM    <DIR>          de4dot\n01/30/2026  02:30 PM    <DIR>          diaphora\n01/30/2026  02:06 PM    <DIR>          DidierStevensSuite-8190354314d6f42c9ddc477a795029dc446176c5\n01/30/2026  02:05 PM    <DIR>          die\n01/30/2026  02:06 PM    <DIR>          dll_to_exe\n01/30/2026  02:06 PM    <DIR>          dnlib\n01/30/2026  02:07 PM    <DIR>          dnSpy\n01/30/2026  02:07 PM    <DIR>          DotDumper\n01/30/2026  02:19 PM    <DIR>          exeinfope\n01/30/2026  02:19 PM    <DIR>          Explorer Suite\n01/30/2026  02:21 PM    <DIR>          ExtremeDumper\n01/30/2026  02:22 PM    <DIR>          EZViewer\n01/30/2026  02:22 PM    <DIR>          fakenet\n01/30/2026  02:22 PM    <DIR>          file\n01/30/2026  02:23 PM    <DIR>          FLOSS\n01/30/2026  02:24 PM    <DIR>          GarbageMan\n01/30/2026  02:26 PM    <DIR>          GoReSym\n01/30/2026  02:26 PM    <DIR>          GoStringUngarbler\n01/30/2026  02:27 PM    <DIR>          HashMyFiles\n01/30/2026  02:27 PM    <DIR>          hollows_hunter\n01/30/2026  02:38 PM            78,336 ida_launcher.exe\n01/30/2026  02:39 PM    <DIR>          idr\n01/30/2026  02:39 PM    <DIR>          ifpsdasm\n01/30/2026  02:42 PM    <DIR>          Inno Setup Decompiler\n01/30/2026  02:40 PM    <DIR>          innoextract\n01/30/2026  02:40 PM    <DIR>          innounp\n01/30/2026  02:41 PM    <DIR>          internet_detector\n01/30/2026  02:44 PM    <DIR>          Malcode Analyst Pack\n01/30/2026  02:58 PM    <DIR>          nmap\n01/30/2026  03:01 PM    <DIR>          OffVis\n01/30/2026  03:02 PM    <DIR>          OneNoteAnalyzer\n01/30/2026  03:02 PM    <DIR>          PDBReSym\n01/30/2026  03:02 PM    <DIR>          PDFStreamDumper\n01/30/2026  03:03 PM    <DIR>          peid\n01/30/2026  03:04 PM    <DIR>          pestudio\n01/30/2026  03:03 PM    <DIR>          pe_unmapper\n01/30/2026  03:05 PM    <DIR>          pkg-unpacker\n01/30/2026  03:05 PM    <DIR>          PMA-labs\n01/30/2026  03:06 PM    <DIR>          procdot\n01/30/2026  03:06 PM        36,911,540 procdot_1_22_57_windows.zip\n01/30/2026  03:06 PM    <DIR>          Process-Dump\n01/30/2026  03:07 PM    <DIR>          pycdas\n01/30/2026  03:07 PM    <DIR>          pycdc\n01/30/2026  03:08 PM    <DIR>          recaf-4.0.0\n01/30/2026  03:10 PM    <DIR>          Regshot-x64-Unicode\n01/30/2026  03:09 PM    <DIR>          reg_export\n01/30/2026  03:11 PM    <DIR>          RunDotNetDll\n01/30/2026  03:11 PM    <DIR>          scdbg\n01/30/2026  03:12 PM    <DIR>          SCLauncher\n01/30/2026  03:12 PM    <DIR>          SCLauncher64\n01/30/2026  03:38 PM    <DIR>          shellcode_launcher\n01/30/2026  03:15 PM    <DIR>          sysinternals\n01/30/2026  03:16 PM    <DIR>          SystemInformer\n01/30/2026  03:17 PM    <DIR>          UniExtract\n01/30/2026  03:18 PM    <DIR>          upx\n01/30/2026  03:19 PM    <DIR>          vbdec\n01/30/2026  03:31 PM    <DIR>          Windows Terminal\n01/30/2026  03:06 PM    <DIR>          WinDump\n01/30/2026  03:34 PM    <DIR>          x64dbg\n               2 File(s)     36,989,876 bytes\n              74 Dir(s)  21,083,299,840 bytes free",
+      "reasoning": "Let me check what tools are available and find the correct path:\n\n```execute\ndir C:\\Tools\n```",
+      "timestamp": "2026-02-03T07:31:58.165278"
+    },
+    {
+      "step_number": 10,
+      "action": "execute_command",
+      "command": "C:\\Tools\\sysinternals\\strings.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_strings.txt",
+      "result": "",
+      "reasoning": "I can see the tools are available. Let me try using strings from the sysinternals folder and also use FLOSS which is better for .NET analysis:\n\n```execute\nC:\\Tools\\sysinternals\\strings.exe \"C:\\Samples",
+      "timestamp": "2026-02-03T07:32:02.611055"
+    },
+    {
+      "step_number": 11,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_strings.txt | findstr /i \"http\\|ftp\\|\\.exe\\|\\.dll\\|registry\\|process\\|encrypt\\|decrypt\\|rat\\|async\\|tcp\\|ip\\|password\\|keylog\"",
+      "result": "",
+      "reasoning": "Good! Now let me check the strings output and also use FLOSS which is better for obfuscated malware:\n\n```execute\ntype C:\\temp\\asyncrat_strings.txt | findstr /i \"http\\|ftp\\|\\.exe\\|\\.dll\\|registry\\|proc",
+      "timestamp": "2026-02-03T07:33:05.915769"
+    },
+    {
+      "step_number": 12,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_strings.txt | more",
+      "result": "!This program cannot be run in DOS mode.\n.text\n`.rsrc\n@.reloc\n=VD\n9A.\n./\\\n*2~\n*.s\n*V(\n*n~\n*~~\n*Vrh%\nr&&\n%r&&\n*.s\n*^(\n*2~.\n*2~.\n*.s\nX}0\njot\np( \nrU \nrY \np(%\nio(\nio(\nps.\nio2\njX(\njY(\nioE\njX(\njY(\ni(J\nioL\ni @B\njoN\nioE\nioL\nr*!\n%r4!\nrD!\npo]\nrL!\n&8R\np(f\nr:\"\nr:\"\np(h\nioL\nr>\"\np(o\nrH\"\npoq\nr\\\"\npoq\nr|\"\nr:\"\np(h\np(r\np(h\npo~\np(%\nrH#\nrT#\npo~\nrd#\npo~\nrH#\nrr#\np(%\np(:\npr\"$\n%r.$\n%r8$\n%rH$\nrT$\nprH$\nr^$\n%rj$\np(h\nrB%\nrZ%\nrb%\n&rZ%\nr|%\np(%\np(%\np(%\nr|%\n%r4!\njot\n&~$\nr2&\nrz&\n joN\nioL\nioL\n Yo\njoN\nioL\nrz&\n Yo\nioE\nioE\n*Ad\nioL\nioL\nioL\nioL\nl*#\nioE\nioL\nioL\njoN\nn(t\ngj(t\nr$'\nrP'\nn(t\nn(t\nn(t\ngj(t\nj(t\nj(t\njoN\nioE\nioL\nioL\nioL\nioL\nioL\nioL\nh([\ni(Z\ni(Z\nh([\ni(J\nioL\nBSJB\nv4.0.30319\n#Strings\n#US\n#GUID\n#Blob\nQ.T\nAction`10\n<>p__0\nIEnumerable`1\nCallSite`1\nList`1\n__StaticArrayInitTypeSize=32\nMicrosoft.Win32\nToUInt32\nToInt32\nSwapInt32\n<>o__2\nX509Certificate2\nWriteUInt64\nToUInt64\nGetAsUInt64\nSetAsUInt64\nToInt64\nSwapInt64\nToUInt16\nToInt16\nSwapInt16\nHMACSHA256\nSha256\nAes256\naes256\n__StaticArrayInitTypeSize=6\nget_UTF8\n<Module>\nMessagePackLib.<PrivateImplementationDetails>\n1DB2A1F9902B35F8F880EF1692CE9947A193D5A698D8F568BDA721658ED4C58B\nES_SYSTEM_REQUIRED\nES_DISPLAY_REQUIRED\nMapNameToOID\nHWID\nget_FormatID\nEXECUTION_STATE\n87639126EA77B358F26532367DBA67C5310EF50A8D9888ED070CD40E1F605A8F\nget_ASCII\nSystem.IO\nIsXP\nBDOS\nES_CONTINUOUS\nget_IV\nset_IV\nGenerateIV\nMTX\nvalue__\nReadServertData\ndata\nmscorlib\nSystem.Collections.Generic\nMicrosoft.VisualBasic\nget_SendSync\nEndRead\nBeginRead\nThread\nLoad\nInnerAdd\nSHA256Managed\nget_Connected\nget_IsConnected\nset_IsConnected\nReceived\nget_Guid\nHwid\n<SendSync>k__BackingField\n<IsConnected>k__BackingField\n<KeepAlive>k__BackingField\n<HeaderSize>k__BackingField\n<Ping>k__BackingField\n<ActivatePong>k__BackingField\n<Interval>k__BackingField\n<Buffer>k__BackingField\n<Offset>k__BackingField\n<SslClient>k__BackingField\n<TcpClient>k__BackingField\nInnerAddMapChild\nInnerAddArrayChild\nhWnd\nSend\nAppend\nRegistryValueKind\nReplace\nCreateInstance\nset_Mode\nFileMode\nPaddingMode\nEnterDebugMode\nCryptoStreamMode\nCompressionMode\nCipherMode\nSelectMode\nutf8Encode\nDeleteSubKeyTree\nget_Message\nDetectSandboxie\nInvoke\nIEnumerable\nIDisposable\nToDouble\nSwapDouble\nget_Handle\nRuntimeFieldHandle\nGetModuleHandle\nRuntimeTypeHandle\nGetTypeFromHandle\nWaitHandle\nWriteSingle\nToSingle\nSetAsSingle\nInstallFile\nDecodeFromFile\nSaveBytesToFile\nIsInRole\nWindowsBuiltInRole\nGetActiveWindowTitle\nget_MainModule\nProcessModule\nset_WindowStyle\nProcessWindowStyle\nget_Name\nget_FileName\nset_FileName\nGetTempFileName\nGetFileName\nfileName\nlpModuleName\nget_MachineName\nget_OSFullName\nget_FullName\nIsValidDomainName\nget_UserName\nlowerName\nSetName\nCheckHostName\nname\nDateTime\nget_LastWriteTime\nToUniversalTime\nWriteLine\nCombine\nUriHostNameType\nget_ValueType\nvalueType\nMsgPackType\nProtocolType\nGetType\nSocketType\nFileShare\nSystem.Core\nServersignature\nClose\nDispose\nParse\nStrReverse\nX509Certificate\nValidateServerCertificate\ncertificate\nCreate\nSetThreadExecutionState\nDelete\nCallSite\nWrite\nCompilerGeneratedAttribute\nDebuggableAttribute\nComVisibleAttribute\nAssemblyTitleAttribute\nAssemblyTrademarkAttribute\nTargetFrameworkAttribute\nAssemblyFileVersionAttribute\nAssemblyConfigurationAttribute\nAssemblyDescriptionAttribute\nDefaultMemberAttribute\nCompilationRelaxationsAttribute\nAssemblyProductAttribute\nAssemblyCopyrightAttribute\nAssemblyCompanyAttribute\nRuntimeCompatibilityAttribute\nset_UseShellExecute\nReadByte\nWriteByte\nDeleteValue\ninnerValue\nGetValue\nSetValue\nvalue\nget_KeepAlive\nset_KeepAlive\nRemove\ncc.exe\nset_BlockSize\nget_TotalSize\nget_HeaderSize\nset_HeaderSize\nset_SendBufferSize\nset_ReceiveBufferSize\nset_KeySize\nIndexOf\nstrFlag\nCryptoConfig\nget_Ping\nset_Ping\nSystem.Threading\nset_Padding\nadd_SessionEnding\nSystemEvents_SessionEnding\nUTF8Encoding\nSystem.Drawing.Imaging\nSystem.Runtime.Versioning\nFromBase64String\nToBase64String\nReadString\nDownloadString\nWriteString\nToString\nget_AsString\nset_AsString\nBytesAsString\nGetAsString\nSetAsString\nGetString\nBytesAsHexString\nSubstring\nSystem.Drawing\nget_ActivatePong\nset_ActivatePong\nset_ErrorDialog\nmsg\nComputeHash\nstrToHash\nGetHash\nVerifyHash\nFlush\nget_ExecutablePath\nGetTempPath\npath\nHmacSha256Length\nget_Length\nIvLength\nAuthKeyLength\nUri\nAnti\nmsgpackObj\nlistObj\nobj\nMessagePackLib.MessagePack\nMsgPack\nAsyncCallback\nRemoteCertificateValidationCallback\nTimerCallback\nunpack_msgpack\nRegistryKeyPermissionCheck\nFlushFinalBlock\nIsSmallDisk\nbVal\nfVal\niVal\nstrVal\nRtlSetProcessIsCritical\nProcessCritical\nNetworkCredential\nSystem.Security.Principal\nWindowsPrincipal\nAreEqual\nget_Interval\nset_Interval\nClient.Install\nkernel32.dll\nuser32.dll\nntdll.dll\nKill\nPoll\nWriteNull\nSetAsNull\nMutexControl\nEncode2Stream\nFileStream\nNetworkStream\nSslStream\nDecodeFromStream\nCryptoStream\nGZipStream\nMemoryStream\nProgram\nget_Item\nget_Is64BitOperatingSystem\nClient.Algorithm\nSymmetricAlgorithm\nAsymmetricAlgorithm\nHashAlgorithm\nTrim\nRandom\nICryptoTransform\nMsgPackEnum\nWriteBoolean\nToBoolean\nSetAsBoolean\nHwidGen\nlen\nchildren\nMain\nX509Chain\nchain\nAppDomain\nget_CurrentDomain\nPastebin\nIsAdmin\nJoin\nGetFileNameWithoutExtension\nget_OSVersion\nSystem.IO.Compression\nApplication\nSystem.Security.Authentication\nSystem.Reflection\nX509CertificateCollection\nManagementObjectCollection\nClient.Connection\nset_Position\nposition\nCryptographicException\nArgumentNullException\nArgumentException\nUnknown\nImageCodecInfo\nSendInfo\nFileInfo\nDriveInfo\nFileSystemInfo\nComputerInfo\nCSharpArgumentInfo\nProcessStartInfo\nWriteMap\nPreventSleep\nZip\ncurrentApp\nMicrosoft.CSharp\nGroup\nNormalStartup\nSystem.Linq\nClear\nChar\nInvokeMember\nMD5CryptoServiceProvider\nRSACryptoServiceProvider\nAesCryptoServiceProvider\nStringBuilder\nInstallFolder\nIdSender\nsender\nMicrosoft.CSharp.RuntimeBinder\nCallSiteBinder\nGetEncoder\nget_Buffer\nset_Buffer\nWriteInteger\nget_AsInteger\nset_AsInteger\nGetAsInteger\nSetAsInteger\nDetectDebugger\nManagementObjectSearcher\nSessionEndingEventHandler\nTimer\nowner\nClient.Helper\nToUpper\nDetectManufacturer\nCurrentUser\nStreamWriter\nTextWriter\nEnter\nBitConverter\nToLower\nError\nIEnumerator\nManagementObjectEnumerator\nSystem.Collections.IEnumerable.GetEnumerator\nActivator\n.ctor\n.cctor\nMonitor\nCreateDecryptor\nCreateEncryptor\nIntPtr\nSystem.Diagnostics\nNativeMethods\nMicrosoft.VisualBasic.Devices\nSystem.Runtime.InteropServices\nSystem.Runtime.CompilerServices\nDebuggingModes\nExpandEnvironmentVariables\nGetProcesses\nGetHostAddresses\nSystem.Security.Cryptography.X509Certificates\nEncode2Bytes\nGetUtf8Bytes\nutf8Bytes\nRfc2898DeriveBytes\nReadAllBytes\nDecodeFromBytes\nSwapBytes\nLoadFileAsBytes\nGetAsBytes\nSetAsBytes\nGetBytes\nrawBytes\nbytes\nCSharpArgumentInfoFlags\nCSharpBinderFlags\nesFlags\nStrings\nInitializeSettings\nSessionEndingEventArgs\nAnti_Analysis\nRunAntiAnalysis\nPacks\nICredentials\nset_Credentials\nEquals\nSslProtocols\nReadTools\nWriteTools\nBytesTools\nSystem.Windows.Forms\nDns\nContains\nSystem.Collections\nStringSplitOptions\nGetImageDecoders\nRuntimeHelpers\nSslPolicyErrors\nsslPolicyErrors\nFileAccess\nhProcess\nGetCurrentProcess\nIPAddress\nCompress\nDecompress\nSystem.Net.Sockets\nset_Arguments\nSystemEvents\nPorts\nExists\nHosts\nAntivirus\nConcat\nImageFormat\nformat\nWriteFloat\nget_AsFloat\nset_AsFloat\nGetAsFloat\nSetAsFloat\nFindObject\nManagementBaseObject\nForcePathObject\nCollect\nConnect\nReconnect\nGet\nSystem.Net\nSet\nTarget\nClient.Handle_Packet\nKeepAlivePacket\nClientSocket\nSystem.Collections.IEnumerator.Reset\nget_Offset\nset_Offset\nSplit\nClientOnExit\nSalt\nIAsyncResult\nToUpperInvariant\nWebClient\nInitializeClient\nget_SslClient\nset_SslClient\nget_TcpClient\nset_TcpClient\nAuthenticateAsClient\nSystem.Management\nEnvironment\nparent\nSystem.Collections.IEnumerator.Current\nSystem.Collections.IEnumerator.get_Current\nGetCurrent\nCheckRemoteDebuggerPresent\nisDebuggerPresent\nget_RemoteEndPoint\nget_Count\nget_ProcessorCount\ncount\nGetPathRoot\nDecrypt\nEncrypt\nParameterizedThreadStart\nConvert\nFailFast\nToList\ninput\nSystem.Collections.IEnumerator.MoveNext\nSystem.Text\nGetWindowText\ntext\nGetForegroundWindow\nset_CreateNoWindow\nindex\nCloseMutex\nCreateMutex\nDelay\nWirteArray\nInitializeArray\nMsgPackArray\nToArray\nget_AsArray\nrefAsArray\nget_Key\nset_Key\nCreateSubKey\nDeleteSubKey\nOpenSubKey\nget_PublicKey\n_authKey\nmasterKey\nRegistryKey\n_key\nSystem.Security.Cryptography\nAssembly\nAddressFamily\nBlockCopy\nWriteBinary\nToBinary\nget_SystemDirectory\nSetRegistry\nop_Equality\nop_Inequality\nSystem.Net.Security\nWindowsIdentity\nIsNullOrEmpty\nSHA256\n8RLavFpXOq8mpt7WqxWgZCeoVuvDW4bi4ZkQY+vzZ0flrKgfS/9KoLHnPq4AzjzwHSMlrQs30Fx+o85ClC0E2g==\nhZOjO+XQValfM/jNZvzyqDZmyC5wXfgZoY4yc8GKZlhfHGCDd5g/RgWEemBjBkVQ7Z5TK/KZupdk/IzBX1fY9g==\nDH8lAEbJMk64oJ/iX122oG0FP14/7W9FZjyl9/+wsAL3npoK8cOBINJ6obq2O4Kv+WgR41bpiX+JrOVp44f35g==\np997u+y9SBblK1EgN0EhjBvwKpV2jRpMD8KaGV+f1IRvLHlOKHlqNba+Y+PMzlzspr4BcUPTGLQtxKC2WPk4+w==\n%Temp%\naha.exe\n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\nnull\nPacket\nPing\nMessage\ncmd\n/c schtasks /create /f /sc onlogon /rl highest /tn \"\n\" /tr '\"\n\"' & exit\n\\nuR\\noisreVtnerruC\\swodniW\\tfosorciM\\erawtfoS\n.bat\n@echo off\ntimeout 3 > NUL\nSTART \"\" \"\nCD \nDEL \"\n\" /f /q\nSelect * from Win32_ComputerSystem\nManufacturer\nmicrosoft corporation\nModel\nVIRTUAL\nvmware\nVirtualBox\nSbieDll.dll\nErr HWID\nClientInfo\nHWID\nUser\nMicrosoft\nTrue\n64bit\nFalse\n32bit\nPath\nVersion\nAdmin\ntrue\nfalse\nPerformance\nPastebin\nAntivirus\nInstalled\nPong\nGroup\n\\root\\SecurityCenter2\nSelect * from AntivirusProduct\ndisplayName\nN/A\nSoftware\\\npong\nplugin\nsavePlugin\nDll\nsendPlugin\nHashes\nHash\nPlugin.Plugin\nRun\nMsgpack\nReceived\nError\nmasterKey can not be null or empty.\ninput can not be null.\nInvalid message authentication code (MAC).\n{0:D3} \n{0:X2} \n(never used) type $c1\n(ext8,ext16,ex32) type $c7,$c8,$c9\n?ft1\nz\\V\nWrapNonExceptionThrows\n1.0.0.0\n).NETFramework,Version=v4.0,Profile=Client\nFrameworkDisplayName\n.NET Framework 4 Client Profile\nItem\n_CorExeMain\nmscoree.dll\nVS_VERSION_INFO\nVarFileInfo\nTranslation\nStringFileInfo\n000004b0\nComments\nCompanyName\nFileDescription\nFileVersion\n1.0.0.0\nInternalName\nStub.exe\nLegalCopyright\nLegalTrademarks\nOriginalFilename\nStub.exe\nProductName\nProductVersion\n1.0.0.0\nAssembly Version\n1.0.0.0\n<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">\n  <trustInfo xmlns=\"urn:schemas-microsoft-com:asm.v2\">\n    <security>\n      <requestedPrivileges>\n        <requestedExecutionLevel level=\"asInvoker\" uiAccess=\"false\" />\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  <compatibility xmlns=\"urn:schemas-microsoft-com:compatibility.v1\">\n    <application>\n      <!-- Windows Vista -->\n      <supportedOS Id=\"{e2011457-1546-43c5-a5fe-008deee3d3f0}\"/>\n      <!-- Windows 7 -->\n      <supportedOS Id=\"{35138b9a-5d96-4fbd-8e2d-a2440225f93a}\"/>\n      <!-- Windows 8 -->\n      <supportedOS Id=\"{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}\"/>\n      <!-- Windows 8.1 -->\n      <supportedOS Id=\"{1f676c76-80e1-4239-95bb-83d0f6d0da78}\"/>\n      <!-- Windows 10 -->\n      <supportedOS Id=\"{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}\"/>\n    </application>\n  </compatibility>\n  <asmv3:application  xmlns:asmv3=\"urn:schemas-microsoft-com:asm.v3\" >\n    <asmv3:windowsSettings xmlns=\"http://schemas.microsoft.com/SMI/2005/WindowsSettings\">\n      <dpiAware>true</dpiAware>\n    </asmv3:windowsSettings>\n  </asmv3:application>\n</assembly>",
+      "reasoning": "Let me check the strings file first and then use FLOSS for better analysis:\n\n```execute\ntype C:\\temp\\asyncrat_strings.txt | more\n```",
+      "timestamp": "2026-02-03T07:33:08.481609"
+    },
+    {
+      "step_number": 13,
+      "action": "execute_command",
+      "command": "C:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" --no-static-strings > C:\\temp\\asyncrat_floss.txt",
+      "result": "usage: floss.exe [-h] [-H] [-n MIN_LENGTH]\n                 [--no {static,stack,tight,decoded} [{static,stack,tight,decoded} ...]]\n                 [--only {static,stack,tight,decoded} [{static,stack,tight,decoded} ...]]\n                 [-j] [-v] [-d] [-q] [--color {auto,always,never}]\n                 sample",
+      "reasoning": "Excellent! The strings reveal this is definitely AsyncRAT. Let me now use FLOSS for better analysis and check for any obfuscated strings:\n\n```execute\nC:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db5",
+      "timestamp": "2026-02-03T07:33:17.134608"
+    },
+    {
+      "step_number": 14,
+      "action": "execute_command",
+      "command": "C:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" --only decoded > C:\\temp\\asyncrat_floss.txt",
+      "result": "",
+      "reasoning": "Let me use the correct FLOSS syntax:\n\n```execute\nC:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" --only decoded > C:\\temp\\asyncrat_floss",
+      "timestamp": "2026-02-03T07:33:21.802827"
+    },
+    {
+      "step_number": 15,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_floss.txt",
+      "result": "FLARE FLOSS RESULTS (version v3.1.1-0-g3cd3ee6)\n\n+------------------------+----------------------------------------------------+\n| file path              | C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce1\u2026 |\n| identified language    | dotnet (version unknown)                           |\n| extracted strings      |                                                    |\n|  static strings        | Disabled                                           |\n|   language strings     | 0 (0 characters)                                   |\n|  stack strings         | Disabled                                           |\n|  tight strings         | Disabled                                           |\n|  decoded strings       | Disabled                                           |\n+------------------------+----------------------------------------------------+",
+      "reasoning": "Let me check the FLOSS output and also use pestudio for PE analysis:\n\n```execute\ntype C:\\temp\\asyncrat_floss.txt\n```",
+      "timestamp": "2026-02-03T07:34:06.455616"
+    },
+    {
+      "step_number": 16,
+      "action": "execute_command",
+      "command": "C:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_floss_full.txt",
+      "result": "",
+      "reasoning": "Let me run FLOSS with all string extraction enabled:\n\n```execute\nC:\\Tools\\FLOSS\\floss.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\" > C:\\temp\\asyncrat_flos",
+      "timestamp": "2026-02-03T07:35:04.484080"
+    },
+    {
+      "step_number": 17,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_floss_full.txt | findstr /i \"http\\|tcp\\|ip\\|password\\|keylog\\|registry\\|process\\|encrypt\\|decrypt\\|rat\\|async\"",
+      "result": "",
+      "reasoning": "Now let me check the full FLOSS output and also use pestudio for PE analysis:\n\n```execute\ntype C:\\temp\\asyncrat_floss_full.txt | findstr /i \"http\\|tcp\\|ip\\|password\\|keylog\\|registry\\|process\\|encrypt",
+      "timestamp": "2026-02-03T07:35:08.100649"
+    },
+    {
+      "step_number": 18,
+      "action": "execute_command",
+      "command": "C:\\Tools\\pestudio\\pestudio.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"",
+      "result": "'C:\\Tools\\pestudio\\pestudio.exe' is not recognized as an internal or external command,\noperable program or batch file.",
+      "reasoning": "Let me use pestudio for PE analysis since it's perfect for .NET malware:\n\n```execute\nC:\\Tools\\pestudio\\pestudio.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.ex",
+      "timestamp": "2026-02-03T07:36:07.952448"
+    },
+    {
+      "step_number": 19,
+      "action": "execute_command",
+      "command": "dir C:\\Tools\\pestudio",
+      "result": "Volume in drive C has no label.\n Volume Serial Number is 9202-F40A\n\n Directory of C:\\Tools\\pestudio\n\n01/30/2026  03:04 PM    <DIR>          .\n01/30/2026  03:34 PM    <DIR>          ..\n01/30/2026  03:04 PM    <DIR>          pestudio\n               0 File(s)              0 bytes\n               3 Dir(s)  21,086,285,824 bytes free",
+      "reasoning": "Let me check what's in the pestudio directory and use dnSpy for .NET analysis:\n\n```execute\ndir C:\\Tools\\pestudio\n```",
+      "timestamp": "2026-02-03T07:36:10.861216"
+    },
+    {
+      "step_number": 20,
+      "action": "execute_command",
+      "command": "dir C:\\Tools\\pestudio\\pestudio",
+      "result": "Volume in drive C has no label.\n Volume Serial Number is 9202-F40A\n\n Directory of C:\\Tools\\pestudio\\pestudio\n\n01/30/2026  03:04 PM    <DIR>          .\n01/30/2026  03:04 PM    <DIR>          ..\n03/28/2025  08:21 AM            20,323 changes.log\n03/28/2025  08:19 AM         1,295,360 peparser.dll\n03/28/2025  08:19 AM           865,280 pestudio.exe\n01/30/2026  03:04 PM    <DIR>          xml\n               3 File(s)      2,180,963 bytes\n               3 Dir(s)  21,086,359,552 bytes free",
+      "reasoning": "Let me check the nested pestudio directory and also try dnSpy for .NET analysis:\n\n```execute\ndir C:\\Tools\\pestudio\\pestudio\n```",
+      "timestamp": "2026-02-03T07:37:05.335231"
+    },
+    {
+      "step_number": 21,
+      "action": "execute_command",
+      "command": "C:\\Tools\\pestudio\\pestudio\\pestudio.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"",
+      "result": "Command timed out after 300 seconds",
+      "reasoning": "Now let me run pestudio correctly:\n\n```execute\nC:\\Tools\\pestudio\\pestudio\\pestudio.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"\n```",
+      "timestamp": "2026-02-03T07:42:09.539800"
+    },
+    {
+      "step_number": 22,
+      "action": "execute_command",
+      "command": "C:\\Tools\\dnSpy\\dnSpy.exe \"C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe\"",
+      "result": "Command timed out after 300 seconds",
+      "reasoning": "Pestudio is a GUI tool that opened. Let me use dnSpy for .NET analysis instead, which is better for analyzing .NET assemblies:\n\n```execute\nC:\\Tools\\dnSpy\\dnSpy.exe \"C:\\Samples\\rats\\06417db53e9b090c7a0",
+      "timestamp": "2026-02-03T07:47:12.600409"
+    },
+    {
+      "step_number": 23,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_strings.txt | findstr /C:\"192.168\" /C:\"http\" /C:\"tcp\" /C:\"AsyncRAT\" /C:\"password\" /C:\"keylog\" /C:\"registry\"",
+      "result": "<asmv3:windowsSettings xmlns=\"http://schemas.microsoft.com/SMI/2005/WindowsSettings\">",
+      "reasoning": "Let me use command line tools to analyze this .NET assembly. First, let me extract more specific strings and analyze the PE structure:\n\n```execute\ntype C:\\temp\\asyncrat_strings.txt | findstr /C:\"192.1",
+      "timestamp": "2026-02-03T07:47:16.129627"
+    },
+    {
+      "step_number": 24,
+      "action": "execute_command",
+      "command": "type C:\\temp\\asyncrat_strings.txt | findstr /C:\"=\" | findstr /v \"xmlns\"",
+      "result": "=VD\n__StaticArrayInitTypeSize=32\n__StaticArrayInitTypeSize=6\n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\n).NETFramework,Version=v4.0,Profile=Client\n        <requestedExecutionLevel level=\"asInvoker\" uiAccess=\"false\" />\n      <supportedOS Id=\"{e2011457-1546-43c5-a5fe-008deee3d3f0}\"/>\n      <supportedOS Id=\"{35138b9a-5d96-4fbd-8e2d-a2440225f93a}\"/>\n      <supportedOS Id=\"{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}\"/>\n      <supportedOS Id=\"{1f676c76-80e1-4239-95bb-83d0f6d0da78}\"/>\n      <supportedOS Id=\"{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}\"/>",
+      "reasoning": "Let me look for more specific indicators in the strings. Based on what I saw, there are some interesting base64 encoded strings:\n\n```execute\ntype C:\\temp\\asyncrat_strings.txt | findstr /C:\"=\" | findst",
+      "timestamp": "2026-02-03T07:47:19.749776"
+    },
+    {
+      "step_number": 25,
+      "action": "execute_command",
+      "command": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('dkRFTVRDcWM5V210VzBiYWlMcWo4a0U1ZEdPZHdITTg='))\"",
+      "result": "vDEMTCqc9WmtW0baiLqj8kE5dGOdwHM8",
+      "reasoning": "Let me decode some of these suspicious base64 strings. The first short one looks interesting:\n\n```execute\npowershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String",
+      "timestamp": "2026-02-03T07:48:07.133687"
+    }
+  ],
+  "findings": [],
+  "iocs": {
+    "hashes": [
+      "06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff",
+      "06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff",
+      "aa16b5a6c856065b71f4e07cd37d9240",
+      "cbb1d5c32d02b4e07128a197c8b8fb6ea597916a",
+      "8190354314d6f42c9ddc477a795029dc446176c5",
+      "1DB2A1F9902B35F8F880EF1692CE9947A193D5A698D8F568BDA721658ED4C58B",
+      "87639126EA77B358F26532367DBA67C5310EF50A8D9888ED070CD40E1F605A8F"
+    ],
+    "ips": [
+      "1.0.0.0",
+      "1.0.0.0",
+      "1.0.0.0",
+      "1.0.0.0"
+    ],
+    "domains": [
+      "system.io",
+      "system.collections.generic",
+      "microsoft.visualbasic",
+      "system.core",
+      "cc.exe",
+      "system.threading",
+      "system.drawing.imaging",
+      "system.runtime.versioning",
+      "system.drawing",
+      "messagepacklib.messagepack",
+      "system.security.principal",
+      "client.install",
+      "kernel32.dll",
+      "user32.dll",
+      "ntdll.dll",
+      "client.algorithm",
+      "system.io.compression",
+      "system.security.authentication",
+      "system.reflection",
+      "client.connection",
+      "microsoft.csharp",
+      "system.linq",
+      "microsoft.csharp.runtimebinder",
+      "client.helper",
+      "system.collections.ienumerable.getenumerator",
+      "system.diagnostics",
+      "microsoft.visualbasic.devices",
+      "system.runtime.interopservices",
+      "system.runtime.compilerservices",
+      "system.security.cryptography",
+      "system.windows.forms",
+      "system.collections",
+      "system.net.sockets",
+      "system.net",
+      "system.collections.ienumerator.reset",
+      "system.management",
+      "system.collections.ienumerator.current",
+      "system.collections.ienumerator",
+      "system.collections.ienumerator.movenext",
+      "system.text",
+      "system.security.cryptography",
+      "system.net.security",
+      "aha.exe",
+      "sbiedll.dll",
+      "plugin.plugin",
+      "mscoree.dll",
+      "stub.exe",
+      "stub.exe",
+      "schemas.microsoft.com",
+      "changes.log",
+      "peparser.dll",
+      "pestudio.exe"
+    ],
+    "files": [
+      "C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe:",
+      "C:\\Samples\\rats",
+      "C:\\Tools",
+      "C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce1\u2026",
+      "C:\\Tools\\pestudio",
+      "C:\\Tools\\pestudio\\pestudio"
+    ],
+    "registry": []
+  },
+  "mitre_techniques": [],
+  "summary": "Analysis completed after 25 steps.\n\nFindings:\nNo specific findings recorded.\n\nIOCs:\nhashes: 06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff, 06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff, aa16b5a6c856065b71f4e07cd37d9240, cbb1d5c32d02b4e07128a197c8b8fb6ea597916a, 8190354314d6f42c9ddc477a795029dc446176c5\nips: 1.0.0.0, 1.0.0.0, 1.0.0.0, 1.0.0.0\ndomains: system.io, system.collections.generic, microsoft.visualbasic, system.core, cc.exe\nfiles: C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce15c832c0928d73ebbc9c8ebff05320ff.exe:, C:\\Samples\\rats, C:\\Tools, C:\\Samples\\rats\\06417db53e9b090c7a07192dbb6203ce1\u2026, C:\\Tools\\pestudio\n\nNote: Analysis may be incomplete. Review steps for details."
+}

@@ -54,11 +54,16 @@ class DetonationGuard:
         'new-item', 'remove-item', 'copy-item', 'move-item', 'rename-item'
     }
 
-    # Safe Windows commands
+    # Safe Windows commands and analysis utilities
     SAFE_COMMANDS = {
+        # Windows built-ins
         'dir', 'type', 'certutil', 'hostname', 'ipconfig', 'netstat', 'tasklist',
         'whoami', 'systeminfo', 'reg', 'wmic', 'findstr', 'fc', 'comp', 'tree',
-        'attrib', 'icacls', 'where', 'echo', 'set', 'ver'
+        'attrib', 'icacls', 'where', 'echo', 'set', 'ver', 'more', 'sort',
+        # Analysis utilities (these read files but don't execute them)
+        'file', 'strings', 'strings64', 'hexdump', 'xxd', 'od', 'head', 'tail',
+        'capa', 'dumpbin', 'objdump', 'readelf', 'sigcheck', 'sigcheck64',
+        'sha256sum', 'md5sum', 'sha1sum'
     }
 
     def __init__(self, current_vm_ip: str, detonation_vm_ip: str):
@@ -149,6 +154,21 @@ class DetonationGuard:
 
         return first_word in self.SAFE_COMMANDS
 
+    def _is_safe_powershell_cmdlet(self, command: str) -> bool:
+        """Check if command starts with a safe PowerShell cmdlet."""
+        cmd_lower = command.lower().strip()
+        first_word = cmd_lower.split()[0] if cmd_lower.split() else ''
+
+        # Handle cmdlet aliases and variations
+        for safe_cmdlet in self.SAFE_PS_CMDLETS:
+            if first_word == safe_cmdlet or first_word.startswith(safe_cmdlet + ' '):
+                return True
+            # Also check for hyphenated cmdlets (Get-FileHash, Get-Content, etc.)
+            if first_word == safe_cmdlet.replace('-', ''):
+                return True
+
+        return False
+
     def check_command(self, command: str) -> Tuple[bool, str]:
         """
         Check if a command is safe to execute.
@@ -164,7 +184,12 @@ class DetonationGuard:
         if self._is_safe_base_command(command):
             return True, ""
 
-        # Check for safe PowerShell commands
+        # Check if command starts with a safe PowerShell cmdlet (Get-FileHash, Get-Content, etc.)
+        # These are safe even when referencing files in Samples directories
+        if self._is_safe_powershell_cmdlet(command):
+            return True, ""
+
+        # Check for safe PowerShell commands (when prefixed with powershell.exe)
         if cmd_lower.startswith('powershell'):
             if self._is_safe_powershell_command(command):
                 return True, ""
@@ -187,9 +212,11 @@ class DetonationGuard:
                 return False, f"DETONATION BLOCKED: Attempting to execute {ext} file from unknown location: {exe_path}"
 
         # Check for direct execution attempts without full path
-        for ext in self.DANGEROUS_EXTENSIONS:
-            if f'\\samples\\' in cmd_lower and ext in cmd_lower:
-                return False, f"DETONATION BLOCKED: Command appears to execute sample file"
+        # But NOT if it's a safe cmdlet that's just analyzing the file
+        if not self._is_safe_powershell_cmdlet(command):
+            for ext in self.DANGEROUS_EXTENSIONS:
+                if f'\\samples\\' in cmd_lower and ext in cmd_lower:
+                    return False, f"DETONATION BLOCKED: Command appears to execute sample file"
 
         # Default: allow (it's probably a safe analysis command)
         return True, ""
